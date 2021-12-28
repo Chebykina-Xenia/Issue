@@ -13,8 +13,7 @@ class IssueRepositoryTest {
 //ДОБАВЛЕНИЕ
     @Test
     void saveTest(){
-        List<Issue> list = new ArrayList<>();
-
+        //добавляем тэги
         HashSet<Integer> labelTag1 = new HashSet<Integer>();
         HashSet<Integer> labelTag2 = new HashSet<Integer>();
         HashSet<Integer> labelTag3 = new HashSet<Integer>();
@@ -26,19 +25,24 @@ class IssueRepositoryTest {
         labelTag3.add(1);
         labelTag3.add(4);
 
-        list.add(new Issue(1, true, "Ivan", "Test1", "Comment", labelTag1, "Petya", 240));
-        list.add(new Issue(2, false, "Roma", "Test2", "Comment", labelTag2, "Elena", 60));
 
-        repo.saveAll(list);
-      //  repo.findAll();
-        List<Issue> listActual = new ArrayList<>();
+        Collection<Issue> listActual = new ArrayList<>();
 
-        listActual = (List<Issue>) repo.findAll();
+        listActual.add(new Issue(1, true, "Ivan", "Test1", "Comment", labelTag1, "Petya", 240));
+        listActual.add(new Issue(2, false, "Roma", "Test2", "Comment", labelTag2, "Elena", 60));
+
+        repo.saveAll(listActual);
+
+        //listActual = repo.findAll();
+
+       // Collection<Issue> listActual = new ArrayList<>();
+
+        //listActual = (Collection<Issue>) repo.findAll();
 
         Issue first = new Issue(1, true, "Ivan", "Test1", "Comment", labelTag1, "Petya", 240);
         Issue second = new Issue(2, false, "Roma", "Test2", "Comment", labelTag2, "Elena", 60);
 
-        List<Issue> listExpected = Arrays.asList(first, second);
+        Collection<Issue> listExpected = Arrays.asList(first, second);
 
 
      //   repo.save(new Issue(1, true, "Ivan", "Test1", "Comment", labelTag1, "Petya", 240 ));
@@ -46,8 +50,9 @@ class IssueRepositoryTest {
       //  repo.save(new Issue(3, true, "Xenia", "Test3", "Comment", labelTag3, "Artem", 180 ));
 
         //проверка ожидаемого и фактического результата
-       assertTrue(listActual.equals(listExpected));
-//assertEquals(listExpected, listActual);
+      // assertTrue(listActual.equals(listExpected));
+        //assertArrayEquals(listExpected.toArray(), listActual.toArray());
+        assertEquals(listExpected, listActual);
 
     }
 }
