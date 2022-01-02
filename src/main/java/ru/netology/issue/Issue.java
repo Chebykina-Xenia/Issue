@@ -4,15 +4,15 @@ import java.util.Collection;
 import java.util.HashSet;
 
 public class Issue implements Comparable<Issue> {
-   private int id;                              //идентификатор Issue
-   private boolean opend;                       //true-открытое, false-закрытое
-   private String autor;                        //автор
-   private String title;                        //название
-   private String write;                        //описание
-   Collection labelTag;
-   //private int labelTag;                      //отметка по которой профодим фильтрацию
-   private String assignee;                     //ответственный за работу
-   private int workingHours;                      //сколько часов в работе (для сортировки новая-старая)
+    private int id;                              //идентификатор Issue
+    private boolean opend;                       //true-открытое, false-закрытое
+    private String autor;                        //автор
+    private String title;                        //название
+    private String write;                        //описание
+    Collection labelTag;
+    //private int labelTag;                      //отметка по которой профодим фильтрацию
+    private String assignee;                     //ответственный за работу
+    private int workingHours;                      //сколько часов в работе (для сортировки новая-старая)
 
     public Issue() {
     }
@@ -33,6 +33,14 @@ public class Issue implements Comparable<Issue> {
         return id - o.id;
     }
 
+    public boolean matchesString(String text) {
+        return autor.contains(text) || assignee.contains(text);
+    }
+
+    public boolean matchesLable(HashSet<Integer> tag) {
+        return labelTag.containsAll(tag);
+    }
+
     public int getId() {
         return id;
     }
@@ -41,7 +49,7 @@ public class Issue implements Comparable<Issue> {
         this.id = id;
     }
 
-    public boolean isOpend() {
+    public boolean getOpend() {
         return opend;
     }
 
